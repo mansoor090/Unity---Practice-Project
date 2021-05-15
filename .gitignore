@@ -1,0 +1,54 @@
+# =============== #
+# Unity generated #
+# =============== #
+[Tt]emp/
+[Oo]bj/
+[Bb]uild
+[Bb]uilds/
+/[Ll]ibrary/
+sysinfo.txt
+*.stackdump
+*.apk
+Keystore/
+ 
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+[Ee]xported[Oo]bj/
+.vs/
+/*.userprefs
+/*.csproj
+/*.pidb
+/*.suo
+/*.sln*
+/*.user
+/*.unityproj
+/*.booproj
+ 
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store*
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+[Tt]humbs.db
+
+Recordings
+Screenshots
+TrailerRecordings
+/Assets/ConsolePro
+/Assets/ConsolePro.meta
+/.vscode/launch.json
+*iOS_IAP_diamond_tier_*
+Assets/DebugText*
+/Assets/RainMaker/Demo/New Terrain.asset
+remote_config_data
+/remote_config_data
+New Terrain.asset
+New Terrain.asset.meta
+TerrainData.asset
+mono_crash*
+Library/
+Assets/Samples/
