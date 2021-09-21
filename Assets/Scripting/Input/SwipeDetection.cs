@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
-using Utilities;
+
 
 public class SwipeManager : MonoBehaviour {
 
@@ -53,13 +53,13 @@ public class SwipeManager : MonoBehaviour {
     if (duration > timeThreshold) return;
     if (dirVector.magnitude < swipeThreshold) return;
 
-    var direction = dirVector.Rotation(180f).Round();
+    // var direction = dirVector.Rotation(180f).Round();
 
-    print(direction);
+    // print(direction);
 
-    if (direction >= 45 && direction < 135) onSwipeUp.Invoke();
-    else if (direction >= 135 && direction < 225) onSwipeRight.Invoke();
-    else if (direction >= 225 && direction < 315) onSwipeDown.Invoke();
-    else if (direction >= 315 && direction < 360 || direction >= 0 && direction < 45) onSwipeLeft.Invoke();
+    // if (direction >= 45 && direction < 135) onSwipeUp.Invoke();
+    // else if (direction >= 135 && direction < 225) onSwipeRight.Invoke();
+    // else if (direction >= 225 && direction < 315) onSwipeDown.Invoke();
+    // else if (direction >= 315 && direction < 360 || direction >= 0 && direction < 45) onSwipeLeft.Invoke();
   }
 }

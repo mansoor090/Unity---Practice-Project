@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Game.Scripts.Controllers;
-using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
@@ -29,7 +27,7 @@ public class MeshesDeformation : MonoBehaviour
 
 	[SerializeField] bool PerformOnMultiMeshes = false;
 
-	[Button]
+	// [Button]
 	public void GetComponents()
 	{
 		meshFilters    = new MeshFilter[1];
@@ -42,7 +40,7 @@ public class MeshesDeformation : MonoBehaviour
 		}
 	}
 
-	[Button]
+	// [Button]
 	public void CalculateLocalVertz()
 	{
 		var       mesh     = meshFilters[0].sharedMesh;
@@ -185,13 +183,13 @@ public class MeshesDeformation : MonoBehaviour
 				if (collision.relativeVelocity.magnitude > minVelocity)
 				{
 					
-						VFXManager.Instance.HitParticle.transform.position = collision.contacts[0].point;
-						VFXManager.Instance.HitParticle.Emit(1);
-						
-				
-					
-						VFXManager.Instance.sparkParticle.transform.position = collision.contacts[0].point;
-						VFXManager.Instance.sparkParticle.Emit(1);
+						// VFXManager.Instance.HitParticle.transform.position = collision.contacts[0].point;
+						// VFXManager.Instance.HitParticle.Emit(1);
+						//
+						//
+						//
+						// VFXManager.Instance.sparkParticle.transform.position = collision.contacts[0].point;
+						// VFXManager.Instance.sparkParticle.Emit(1);
 					
 					isRepaired                                         = false;
 					if (PerformOnMultiMeshes)
