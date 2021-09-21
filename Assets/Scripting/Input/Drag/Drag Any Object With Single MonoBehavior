@@ -1,0 +1,89 @@
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MouseGrab : MonoBehaviour
+{
+    public float rayDistance = 100f;
+
+    public LayerMask grabblemask;
+
+    public Camera camera;
+
+    public Transform Target;
+    
+    // private variables
+        float mZCoord = 10f;
+    Vector3 mOffset;
+
+
+//     Start is called before the first frame update
+    void Start()
+    {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!Target)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                RaycastHit info;
+                Ray ray = camera.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 100f));
+                if (Physics.Raycast(ray.origin, ray.direction, out info, rayDistance, grabblemask))
+                {
+                    if (info.collider.CompareTag("Apple") || info.collider.CompareTag("Orange"))
+                    {
+                        Target = info.transform;
+                        Target.GetComponent<Rigidbody>().isKinematic = true;
+
+                        mZCoord = camera.WorldToScreenPoint(
+                            Target.transform.position).z;
+
+                        mOffset = Target.transform.position - GetMouseAsWorldPoint();
+                    }
+                }
+            }
+        }
+        else if (Target)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                Vector3 newPosition = GetMouseAsWorldPoint() + mOffset;
+                newPosition.y = 0f;
+                Target.position = Vector3.Lerp(Target.position,
+                    newPosition + Vector3.up+ Vector3.up, 7f * Time.deltaTime);
+
+
+                Target.rotation = Quaternion.Lerp(Target.rotation,
+                    Quaternion.Euler(Target.rotation * Vector3.right), 7f * Time.deltaTime);
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                Target.GetComponent<Rigidbody>().isKinematic = false;
+
+                Target = null;
+            }
+        }
+    }
+
+
+
+
+    private Vector3 GetMouseAsWorldPoint()
+
+    {
+        // Pixel coordinates of mouse (x,y)
+
+        Vector3 mousePoint = Input.mousePosition;
+        // z coordinate of game object on screen
+
+        mousePoint.z = mZCoord;
+        // Convert it to world points
+
+        return Camera.main.ScreenToWorldPoint(mousePoint);
+    }
+}

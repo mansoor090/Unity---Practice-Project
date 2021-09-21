@@ -1,0 +1,77 @@
+Rotate Lerp Towards Object (Look At) in Only One 1 Axis: {
+
+ Vector3 difference = TRANSFORM_B.position - TRANSFORM_A.position;
+ float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg; <- This is Angle Between Two Objects.
+ TRANSFORM_A.rotation = Quaternion.Lerp(TRANSFORM_A.rotation, Quaternion.Euler(0.0f, 0, rotationZ - 90f), Time.deltaTime * rotationSpeed);
+ 
+ // or using lookat function
+ 
+ transform.LookAt(new Vector3(TransformA.position.x,target.position.y,transform.position.z ));
+       
+ }
+---------------------------------------------------------------------------------------------------------------------------
+Angle Between Two Objects:
+{ 
+ Vector3 difference = TRANSFORM_B.position - TRANSFORM_A.position;
+ float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg; <- This is Angle Between Two Objects.
+
+ bool IsFacingTarget()
+    {
+        Vector3 targetDir = Player.transform.position - transform.position;
+        float angle = Vector3.SignedAngle(targetDir, transform.forward, Vector3.up);
+
+        float _ABS_Angle = angle;
+        _ABS_Angle = Mathf.Abs(_ABS_Angle);
+
+        if (_ABS_Angle < 30f)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+}
+---------------------------------------------------------------------------------------------------------------------------
+Move Object Around A Object in Limited/Fixed Distance/Radius
+{
+
+ // multipler = rotationspeed;
+ // vector3.forward = angle
+       
+ Quaternion q = Quaternion.AngleAxis(rotationSpeed * multiplier * Time.fixedDeltaTime, Vector3.forward);
+       
+ // moveposition in Fixed radius and multiply by Q     
+ rbOne.MovePosition(q * (transform.position - Two.transform.position).normalized * ropeLength + Two.transform.position);
+ 
+ //FinalRotation
+ rbOne.MoveRotation(transform.rotation * q);
+        
+}
+
+------------------------------------------------------------------------------------------------------
+
+    float Lerp (float a, float b, float time){
+
+        float value = (1 - time) * a + b * time;
+        return value;
+    }
+    
+------------------------------------------------------------------------------------------------------
+    float InverseLerp (float a, float b, float v){
+
+        float value = (v - a) / (b - a);
+        return value;
+    }
+------------------------------------------------------------------------------------------------------
+   float Remap(float A, float B, float Minimum, float Maximum, float v)
+    {
+        v = Mathf.Clamp(v, A, B);
+        float value = InverseLerp(A, B, v);
+        return Lerp(Minimum, Maximum, value);
+      
+    }
+------------------------------------------------------------------------------------------------------
+
